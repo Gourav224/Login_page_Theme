@@ -1,22 +1,32 @@
-// src/pages/WelcomePage.tsx
 import React from "react";
 
-interface WelcomePageProps {
+const WelcomePage: React.FC<{
     username: string;
     role: string;
-}
-
-const WelcomePage: React.FC<WelcomePageProps> = ({ username, role }) => {
+    darkTheme: boolean;
+    onLogout: () => void;
+}> = ({ username, role, darkTheme, onLogout }) => {
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-900 text-white">
-            <div className="text-center">
-                <h1 className="text-3xl font-bold mb-4">
-                    Welcome, {username}!
-                </h1>
-                <p className="text-gray-400 mb-2">
-                    You are logged in as {role}.
-                </p>
-                <p className="text-gray-400">This is your welcome page.</p>
+        <div
+            className={`min-h-screen flex items-center justify-center ${
+                darkTheme ? "bg-gray-900 text-white" : "bg-gray-100"
+            }`}
+        >
+            <div
+                className={`shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md ${
+                    darkTheme
+                        ? "bg-gray-800 text-white"
+                        : "bg-white text-gray-700"
+                }`}
+            >
+                <h2 className="text-xl mb-4">Welcome, {username}!</h2>
+                <p className="mb-4">Role: {role}</p>
+                <button
+                    onClick={onLogout}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                    Logout
+                </button>
             </div>
         </div>
     );
